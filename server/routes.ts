@@ -2,7 +2,6 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import nodemailer from "nodemailer";
 import rateLimit from "express-rate-limit";
-// Multer types are available globally
 
 // Enhanced file validation
 const ALLOWED_MIME_TYPES = [
@@ -66,7 +65,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Health check endpoint for smoke testing
-  app.get("/api/health", (req, res) => {
+  app.get("/api/health", (req: any, res: any) => {
     res.json({ 
       status: "ok", 
       timestamp: new Date().toISOString(),
@@ -76,7 +75,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Enhanced contact endpoint with better validation
-  app.post("/api/contact", contactLimiter, async (req, res, next) => {
+  app.post("/api/contact", contactLimiter, async (req: any, res: any, next: any) => {
     try {
       const { name, email, subject, message } = req.body ?? {};
       
@@ -85,7 +84,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ 
           message: "Missing required fields",
           required: ['name', 'email', 'subject', 'message'],
-          received: Object.keys(req.body || {}).filter(key => req.body[key])
+          received: Object.keys(req.body || {}).filter((key: string) => req.body[key])
         });
       }
       
@@ -98,27 +97,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const safeSubject = sanitizeText(String(subject), 150);
       const safeMessage = sanitizeText(String(message), 5000);
       
-      // Validate lengths
-      if (safeName.length < 2) {
-        return res.status(400).json({ message: "Name must be at least 2 characters long" });
-      }
-      
-      if (safeSubject.length < 5) {
-        return res.status(400).json({ message: "Subject must be at least 5 characters long" });
-      }
-      
-      if (safeMessage.length < 10) {
-        return res.status(400).json({ message: "Message must be at least 10 characters long" });
-      }
-
-      const to = process.env.CONTACT_TO_EMAIL || "docflowimagecompressor.dev@gmail.com";
+      // Email configuration
+      const to = process.env.TO_EMAIL || "docflowimagecompressor.dev@gmail.com";
       const transporter = nodemailer.createTransport({
-        host: process.env.SMTP_HOST,
-        port: Number(process.env.SMTP_PORT || 587),
-        secure: process.env.SMTP_SECURE === "true",
-        auth: process.env.SMTP_USER && process.env.SMTP_PASS ? {
+        service: process.env.SMTP_SERVICE || "gmail",
+        auth: {
           user: process.env.SMTP_USER,
           pass: process.env.SMTP_PASS,
+        },
+        tls: process.env.SMTP_TLS === "true" ? {
+          rejectUnauthorized: false,
         } : undefined,
       });
 
@@ -142,7 +130,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Image upload endpoint with validation
-  app.post("/api/upload", uploadLimiter, async (req, res, next) => {
+  app.post("/api/upload", uploadLimiter, async (req: any, res: any, next: any) => {
     try {
       // This would be implemented with multer for file uploads
       // For now, return a placeholder response

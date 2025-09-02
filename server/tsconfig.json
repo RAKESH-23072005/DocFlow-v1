@@ -13,18 +13,14 @@
     "isolatedModules": true,
     "noEmit": false,
     "outDir": "dist",
-    "rootDir": "..",
+    "rootDir": "./",
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
-    "baseUrl": "./",
-    "paths": {
-      "@shared/*": ["../shared/*"]
-    }
+    "baseUrl": "./"
   },
   "include": [
-    "./**/*.ts",
-    "../shared/**/*.ts"
+    "./**/*.ts"
   ],
   "exclude": [
     "node_modules",
