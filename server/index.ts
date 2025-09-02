@@ -128,9 +128,16 @@ export default app;
 
 // --- Server Startup ---
 const port = process.env.PORT || 5137;
-server.listen(port, () => {
-  console.log(`🚀 Server running on port ${port}`);
-  if (isDevelopment) {
-    console.log(`Dev server: http://localhost:${port}`);
-  }
-});
+
+// Ensure server is ready before starting
+try {
+  server.listen(port, () => {
+    console.log(`🚀 Server running on port ${port}`);
+    if (isDevelopment) {
+      console.log(`Dev server: http://localhost:${port}`);
+    }
+  });
+} catch (error) {
+  console.error('Failed to start server:', error);
+  process.exit(1);
+}
