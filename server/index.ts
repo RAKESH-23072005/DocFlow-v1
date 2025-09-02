@@ -131,8 +131,8 @@ const port = process.env.PORT || 5137;
 
 // Ensure server is ready before starting
 try {
-  server.listen(port, () => {
-    console.log(`🚀 Server running on port ${port}`);
+  server.listen(port, '0.0.0.0', () => {
+    console.log(`🚀 Server running on port ${port} and host 0.0.0.0`);
     if (isDevelopment) {
       console.log(`Dev server: http://localhost:${port}`);
     }
