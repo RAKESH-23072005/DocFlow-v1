@@ -1,5 +1,5 @@
 import express from "express";
-import { registerRoutes } from "./routes";
+import { registerRoutes } from "./routes.js";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import cors from "cors";
@@ -131,7 +131,10 @@ const port = process.env.PORT || 5137;
 
 // Ensure server is ready before starting
 try {
-  server.listen(port, '0.0.0.0', () => {
+  server.listen({
+    port: Number(port),
+    host: '0.0.0.0'
+  }, () => {
     console.log(`🚀 Server running on port ${port} and host 0.0.0.0`);
     if (isDevelopment) {
       console.log(`Dev server: http://localhost:${port}`);
