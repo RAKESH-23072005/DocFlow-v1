@@ -3,12 +3,12 @@ services:
     name: docflow-server
     env: node
     buildCommand: npm install && npm run build
-    startCommand: npm start
+    startCommand: node dist/index.js
     envVars:
       - key: NODE_ENV
         value: production
       - key: PORT
         value: 10000
       - key: CORS_ORIGIN
-        value: https://your-frontend-domain.vercel.app
+        value: https://doc-flow-v1.vercel.app
     healthCheckPath: /api/health
