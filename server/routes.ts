@@ -99,6 +99,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       // Email configuration
       const to = process.env.TO_EMAIL || "docflowimagecompressor.dev@gmail.com";
+      
+      // Validate SMTP credentials
+      if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
+        console.error('Missing SMTP credentials:', {
+          SMTP_USER: process.env.SMTP_USER ? 'SET' : 'MISSING',
+          SMTP_PASS: process.env.SMTP_PASS ? 'SET' : 'MISSING'
+        });
+        return res.status(500).json({ 
+          message: "Email service not configured",
+          timestamp: new Date().toISOString()
+        });
+      }
+      
       const transporter = nodemailer.createTransport({
         service: process.env.SMTP_SERVICE || "gmail",
         auth: {

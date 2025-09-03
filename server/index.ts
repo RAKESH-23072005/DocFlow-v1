@@ -9,6 +9,9 @@ const app = express();
 // Environment check
 const isDevelopment = process.env.NODE_ENV === "development";
 
+// Trust proxy for rate limiting (fixes X-Forwarded-For warning)
+app.set('trust proxy', 1);
+
 // --- Security Middleware ---
 app.use(helmet({
   contentSecurityPolicy: false,
