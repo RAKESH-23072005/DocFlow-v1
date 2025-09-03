@@ -3,6 +3,7 @@ import { useLocation } from "wouter";
 import PageLayout from "@/components/page-layout";
 import { Mail, MessageSquare, Send, CheckCircle, Shield } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { apiPost } from "@/lib/api";
 
 export default function Contact() {
     const [, setLocation] = useLocation();
@@ -29,15 +30,13 @@ export default function Contact() {
         setIsSubmitting(true);
 
         try {
-            const res = await fetch("/api/contact", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(formData),
-            });
+            const res = await apiPost('/contact', formData);
+            
             if (!res.ok) {
                 const text = await res.text();
                 throw new Error(text || "Failed to send message");
             }
+            
             toast({
                 title: "Message Sent!",
                 description: "Thank you for contacting us. We'll get back to you soon.",
