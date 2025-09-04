@@ -2,6 +2,7 @@ import Header from "@/components/header";
 import UploadArea from "@/components/upload-area";
 import Footer from "@/components/footer";
 import SEO from "@/components/seo";
+import AdSlot from "@/components/ad-slot";
 
 export default function Home() {
   const handleFilesSelected = (files: File[]) => {
@@ -17,6 +18,11 @@ export default function Home() {
         canonical="https://yourwebsite.com/"
       />
       <Header />
+
+      {/* Top Banner Ad - Above Hero Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <AdSlot type="banner" position="top-banner" />
+      </div>
 
       {/* Hero Section */}
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -72,6 +78,11 @@ export default function Home() {
           </div>
         </section>
 
+        {/* In-Content Ad - Between Features and How It Works */}
+        <div className="my-12">
+          <AdSlot type="inline" position="features-section" />
+        </div>
+
         {/* How It Works Section */}
         <section className="mt-16 mb-16">
           <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">How to Compress Images</h2>
@@ -99,7 +110,6 @@ export default function Home() {
           </div>
         </section>
 
-
         {/* FAQ Section */}
         <section className="mt-16 mb-16">
           <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">Frequently Asked Questions</h2>
@@ -112,6 +122,12 @@ export default function Home() {
               <h3 className="font-semibold text-gray-900 mb-2">Are my images safe and private?</h3>
               <p className="text-gray-600">Absolutely! All image processing happens in your browser. Your images never leave your device and are not stored on our servers.</p>
             </div>
+            
+            {/* In-Content Ad - Between FAQ items */}
+            <div className="my-8">
+              <AdSlot type="inline" position="faq-section" />
+            </div>
+            
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
               <h3 className="font-semibold text-gray-900 mb-2">What's the maximum file size I can compress?</h3>
               <p className="text-gray-600">You can compress images up to 50MB each. For larger files, we recommend splitting them into smaller parts.</p>
@@ -123,6 +139,12 @@ export default function Home() {
           </div>
         </section>
       </main>
+      
+      {/* Footer Banner Ad */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <AdSlot type="banner" position="footer-banner" />
+      </div>
+      
       <Footer />
     </div>
   );

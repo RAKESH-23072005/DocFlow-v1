@@ -340,7 +340,7 @@ export default function Compress() {
             </div>
 
             {/* Sidebar Ad Slot */}
-            <AdSlot type="sidebar" />
+            <AdSlot type="sidebar" position="sidebar" />
           </div>
 
           {/* Fixed Compress All Button at Bottom */}
@@ -357,6 +357,11 @@ export default function Compress() {
             </Button>
           </div>
         </div>
+      </div>
+
+      {/* Sticky Mobile Banner - Only on mobile */}
+      <div className="lg:hidden">
+        <AdSlot type="sticky" position="mobile-sticky" />
       </div>
 
       <Footer />

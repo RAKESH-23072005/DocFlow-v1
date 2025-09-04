@@ -8,6 +8,7 @@ import { Download, ArrowLeft, Share2, Facebook, Twitter, Linkedin, ChevronDown }
 import { formatFileSize } from "@/lib/image-utils";
 import { useToast } from "@/hooks/use-toast";
 import SEO from "@/components/seo";
+import AdSlot from "@/components/ad-slot";
 
 interface CompressedImageData {
   id: string;
@@ -176,6 +177,11 @@ export default function DownloadPage() {
       </div>
       <Header />
 
+      {/* Top Banner Ad - Above Main Content */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <AdSlot type="banner" position="download-top-banner" />
+      </div>
+
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Success Message */}
         <div className="text-center mb-8">
@@ -222,6 +228,11 @@ export default function DownloadPage() {
           </Button>
         </div>
 
+        {/* In-Content Ad - After Download Options */}
+        <div className="my-8">
+          <AdSlot type="inline" position="download-options-section" />
+        </div>
+
         {/* Savings Circle */}
         <div className="flex justify-center mb-8">
           <div className="relative">
@@ -242,51 +253,9 @@ export default function DownloadPage() {
           </div>
         </div>
 
-        {/* Continue Section */}
-        {/* <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Continue to...</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Button
-              variant="outline"
-              className="flex items-center justify-start p-4 h-auto"
-              onClick={() => setLocation('/')}
-            >
-              <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
-                <Download className="w-4 h-4 text-blue-600" />
-              </div>
-              <span>Resize IMAGE</span>
-            </Button>
-            <Button
-              variant="outline"
-              className="flex items-center justify-start p-4 h-auto"
-              onClick={() => setLocation('/')}
-            >
-              <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center mr-3">
-                <Download className="w-4 h-4 text-green-600" />
-              </div>
-              <span>Rotate IMAGE</span>
-            </Button>
-            <Button
-              variant="outline"
-              className="flex items-center justify-start p-4 h-auto"
-              onClick={() => setLocation('/')}
-            >
-              <div className="w-8 h-8 bg-yellow-100 rounded-lg flex items-center justify-center mr-3">
-                <Download className="w-4 h-4 text-yellow-600" />
-              </div>
-              <span>Convert to JPG</span>
-            </Button>
-          </div>
-          <Button
-            variant="outline"
-            className="flex items-center justify-start p-4 h-auto mt-4"
-            onClick={() => setLocation('/')}
-          >
-            <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center mr-3">
-              <Download className="w-4 h-4 text-purple-600" />
-            </div>
-            <span>Watermark IMAGE</span>
-          </Button>
+        {/* In-Content Ad - After Savings Display */}
+        <div className="my-8">
+          <AdSlot type="inline" position="savings-section" />
         </div>
 
         {/* Social Sharing */}
@@ -370,18 +339,13 @@ export default function DownloadPage() {
                 </svg>
                 <span className="text-sm font-medium">Copy Link</span>
               </button>
-
-              {/* <button
-                onClick={() => window.open('mailto:?subject=Check out this awesome image compressor tool!&body=Hi! I found this amazing image compression tool that you might find useful: https://yourwebsite.com', '_blank')}
-                className="flex items-center space-x-2 px-4 py-2 bg-white/80 hover:bg-white text-gray-700 rounded-lg transition-all duration-200 hover:shadow-md"
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-                <span className="text-sm font-medium">Email</span>
-              </button> */}
             </div>
           </div>
+        </div>
+
+        {/* In-Content Ad - After Social Sharing */}
+        <div className="my-8">
+          <AdSlot type="inline" position="social-sharing-section" />
         </div>
 
         {/* Trust Section */}
@@ -395,6 +359,17 @@ export default function DownloadPage() {
           </p>
         </div>
       </main>
+
+      {/* Footer Banner Ad */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <AdSlot type="banner" position="download-footer-banner" />
+      </div>
+
+      {/* Sticky Mobile Banner - Only on mobile */}
+      <div className="lg:hidden">
+        <AdSlot type="sticky" position="download-mobile-sticky" />
+      </div>
+
       <Footer />
     </div>
   );
