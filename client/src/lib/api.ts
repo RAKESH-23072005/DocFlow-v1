@@ -6,14 +6,10 @@ const getApiUrl = (endpoint: string): string => {
     // Remove trailing slash from base URL and leading slash from endpoint
     const cleanBaseUrl = baseUrl.replace(/\/$/, '');
     const cleanEndpoint = endpoint.replace(/^\//, '');
-    const fullUrl = `${cleanBaseUrl}/${cleanEndpoint}`;
-    console.log('API URL:', fullUrl); // Debug log
-    return fullUrl;
+    return `${cleanBaseUrl}/${cleanEndpoint}`;
   }
   // Fallback to relative path for development
-  const fallbackUrl = `/api${endpoint.startsWith('/') ? endpoint : `/${endpoint}`}`;
-  console.log('Fallback API URL:', fallbackUrl); // Debug log
-  return fallbackUrl;
+  return `/api${endpoint.startsWith('/') ? endpoint : `/${endpoint}`}`;
 };
 
 export const apiCall = async (

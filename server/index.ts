@@ -26,11 +26,16 @@ app.use(helmet({
 
 // --- CORS ---
 const allowedOrigins = process.env.CORS_ORIGIN?.split(",") || [];
-console.log('Allowed CORS origins:', allowedOrigins); // Debug log
 
-// Temporary CORS fix for testing
 app.use(cors({
-  origin: true, // Allow all origins temporarily
+  origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
+    if (isDevelopment || !origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true,
   optionsSuccessStatus: 200,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
